@@ -7,7 +7,7 @@ pipeline {
 
     environment {
         // these are the environment variables (Amir's machine) that will be used in the pipeline
-       PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
+        PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
        JAVA_HOME = 'C:\\Program Files\\Java\\jdk-21'  // Adjust to your actual JDK path
 
 
