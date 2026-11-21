@@ -21,7 +21,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'master', url: 'YOUR own project github repo'
+                git branch: 'master', url: 'https://github.com/Khaleddamascene/RTL_BMI_Solution_Instructions.git'
             }
         }
 
