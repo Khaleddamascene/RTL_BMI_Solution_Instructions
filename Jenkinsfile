@@ -19,7 +19,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'master',
-                    url: 'https://github.com/Khaleddamascene/RTL_BMI_Solution_Instructions.git'
+                        url: 'https://github.com/Khaleddamascene/RTL_BMI_Solution_Instructions.git'
             }
         }
 
@@ -32,9 +32,9 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withCredentials([usernamePassword(
-                    credentialsId: "${SONAR_CREDENTIALS_ID}",
-                    usernameVariable: 'SONAR_USER',
-                    passwordVariable: 'SONAR_TOKEN'
+                        credentialsId: "${SONAR_CREDENTIALS_ID}",
+                        usernameVariable: 'SONAR_USER',
+                        passwordVariable: 'SONAR_TOKEN'
                 )]) {
                     withSonarQubeEnv("${SONARQUBE_SERVER}") {
                         bat 'mvn -B org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.host.url=%SONAR_HOST_URL% -Dsonar.projectKey=BMI_Cal -Dsonar.projectName=BMI_Cal -Dsonar.token=%SONAR_TOKEN%'
@@ -60,8 +60,13 @@ pipeline {
         stage('Push Docker Image to Docker Hub') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS_ID) {
-                        docker.image("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}").push()
+                    docker.withRegistry(
+                            'https://index.docker.io/v1/',
+                            DOCKERHUB_CREDENTIALS_ID
+                    ) {
+                        docker.image(
+                                "${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}"
+                        ).push()
                     }
                 }
             }
